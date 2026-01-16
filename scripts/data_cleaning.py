@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import os
+import data_visualization as dv
 
 def read_data(file_path):
 
@@ -65,11 +66,13 @@ def main():
     else:
         print("Brak oczyszczonych danych do wyświetlenia.")
 
+
 if __name__ == "__main__":
     file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'data', 'covid_data.csv'))
     df = read_data(file_path)
     cleaned_df = clean_data(df)
     top_countries = top_death(cleaned_df, n=10)
+    dv.visualization(cleaned_df)
     # format total_deaths for display as integers
     if not top_countries.empty:
         top_countries['total_deaths'] = top_countries['total_deaths'].round(0).astype(int)
@@ -78,3 +81,4 @@ if __name__ == "__main__":
         print(top_countries)
     else:
         print("Brak oczyszczonych danych do wyświetlenia.")
+    
